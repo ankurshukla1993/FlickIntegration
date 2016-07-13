@@ -9,6 +9,17 @@ public class GridItem {
     private String image;
     private String description;
     private String date_taken;
+    private boolean isflipped ;
+
+    public boolean isflipped() {
+        return isflipped;
+    }
+
+    public void setIsflipped(boolean isflipped) {
+        this.isflipped = isflipped;
+    }
+
+
 
     public String getTitle() {
         return title;

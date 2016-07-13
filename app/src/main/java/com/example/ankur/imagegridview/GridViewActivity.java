@@ -55,13 +55,17 @@ public class GridViewActivity extends AppCompatActivity implements ConnectivityR
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
                 //Get item at position
-                //GridItem item = (GridItem) parent.getItemAtPosition(position);
+                GridItem item = (GridItem) parent.getItemAtPosition(position);
+
                 ViewFlipper flipper = (ViewFlipper) v.findViewById(R.id.my_view_flipper);
-                if(flipper.getDisplayedChild() == 0){
-                    flipper.setDisplayedChild(1);
+
+                if(item.isflipped()){
+                    flipper.setDisplayedChild(0);
+                    item.setIsflipped(false);
                 }
                 else{
-                    flipper.setDisplayedChild(0);
+                    flipper.setDisplayedChild(1);
+                    item.setIsflipped(true);
                 }
 
 
@@ -170,6 +174,7 @@ public class GridViewActivity extends AppCompatActivity implements ConnectivityR
                 item.setDescription(description);
                 item.setDate_taken(date_taken);
                 item.setImage(image);
+                item.setIsflipped(false);
 
                 mGridData.add(item);
             }

@@ -11,6 +11,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
+
 import com.squareup.picasso.Picasso;
 
 public class GridViewAdapter extends ArrayAdapter<GridItem> {
@@ -52,6 +54,7 @@ public class GridViewAdapter extends ArrayAdapter<GridItem> {
             holder2.imageView = (ImageView) row.findViewById(R.id.grid_item_image);
             holder.date_takenTextView = (TextView) row.findViewById(R.id.grid_item_dateTaken);
             holder.descriptionTextView = (TextView) row.findViewById(R.id.grid_item_description);
+            holder.flip = (ViewFlipper) row.findViewById(R.id.my_view_flipper);
             holder2.imageView.setLayoutParams(new LinearLayout.LayoutParams(400,400));
             holder2.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             holder2.imageView.setPadding(8, 8, 8, 8);
@@ -66,10 +69,21 @@ public class GridViewAdapter extends ArrayAdapter<GridItem> {
         holder.descriptionTextView.setText(Html.fromHtml(item.getDescription()));
         holder.date_takenTextView.setText(Html.fromHtml(item.getDate_taken()));
         Picasso.with(mContext).load(item.getImage()).into(holder2.imageView);
+
+        if(item.isflipped()){
+            holder.flip.setDisplayedChild(1);
+            item.setIsflipped(true);
+        }
+        else{
+            holder.flip.setDisplayedChild(0);
+            item.setIsflipped(false);
+        }
+
         return row;
     }
 
     static class ViewHolder {
+        ViewFlipper flip ;
         TextView titleTextView;
         TextView date_takenTextView;
         TextView descriptionTextView;
